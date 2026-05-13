@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Spoke Bikes - Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+/* ===========================
+   DESIGN SYSTEM — Black Spoke Bikes
+   Black & White palette, Inter + Syne fonts
+   =========================== */
+
+:root {
+  /* colors */
+  --black: #000000;
+  --white: #ffffff;
+  --primary: #FACC15;
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+  --gray-700: #404040;
+  --gray-800: #262626;
+  --gray-900: #171717;
+
+  /* typography */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Syne', 'Inter', sans-serif;
+
+  /* spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 5rem;
+  --space-3xl: 8rem;
+
+  /* layout */
+  --max-width: 1200px;
+  --nav-height: 72px;
+
+  /* transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 0.2s;
+  --duration-normal: 0.4s;
+  --duration-slow: 0.7s;
+}
+
+/* reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--black);
+  background-color: var(--white);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+ul {
+  list-style: none;
+}
+
+/* utility: container */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* utility: section padding */
+.section {
+  padding: var(--space-3xl) 0;
+}
+
+/* utility: section title */
+.section-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: var(--space-md);
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--gray-500);
+  max-width: 560px;
+  font-weight: 400;
+}
+
+/* scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-600);
+}
+
+.app {
+  overflow-x: hidden;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  transition: background var(--duration-normal) var(--ease-out),
+              backdrop-filter var(--duration-normal) var(--ease-out);
+}
+
+.navbar.scrolled {
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+.navbar-logo span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--white);
+  border-radius: 50%;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.navbar-links {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.navbar-links a {
+  color: var(--gray-300);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color var(--duration-fast) var(--ease-out);
+  position: relative;
+}
+
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--white);
+  transition: width var(--duration-normal) var(--ease-out);
+}
+
+.navbar-links a:hover {
+  color: var(--white);
+}
+
+.navbar-links a:hover::after {
+  width: 100%;
+}
+
+.navbar-menu-btn {
+  display: none;
+  color: var(--white);
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+  .navbar-menu-btn {
+    display: block;
+  }
+  .navbar-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(12px);
+    padding: var(--space-lg);
+    gap: var(--space-md);
+  }
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--black);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 80vw;
+  height: 80vw;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -40%;
+  left: -20%;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  pointer-events: none;
+}
+
+.hero-content {
+  text-align: center;
+  max-width: 900px;
+  padding: 0 var(--space-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--black);
+  background-color: var(--primary);
+  margin-bottom: var(--space-lg);
+  border: 1px solid var(--primary);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: 100px;
+}
+
+.hero h1 {
+  font-size: clamp(2.8rem, 8vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: var(--space-lg);
+}
+
+.hero-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--gray-400);
+  max-width: 520px;
+  margin: 0 auto var(--space-xl);
+  line-height: 1.7;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--primary);
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: var(--space-md) var(--space-xl);
+  border-radius: 100px;
+  transition: transform var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.hero-cta:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(250, 204, 21, 0.25);
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--gray-500), transparent);
+}
+
+.services {
+  background: var(--white);
+}
+
+.services-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.service-card {
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  transition: border-color var(--duration-normal) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--duration-normal) var(--ease-out);
+}
+
+.service-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--gray-100);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-md);
+  transition: background var(--duration-fast) var(--ease-out),
+              color var(--duration-fast) var(--ease-out);
+}
+
+.service-card:hover .service-icon {
+  background: var(--primary);
+  color: var(--black);
+}
+
+.service-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+.service-card p {
+  color: var(--gray-500);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.service-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.how-it-works {
+  background: var(--gray-50);
+}
+
+.how-it-works-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.steps-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+}
+
+.step {
+  flex: 1;
+  max-width: 300px;
+  text-align: center;
+  padding: 0 var(--space-lg);
+  position: relative;
+}
+
+.step-number {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--black);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--space-md);
+}
+
+.step-connector {
+  position: absolute;
+  top: 32px;
+  left: calc(50% + 40px);
+  width: calc(100% - 80px);
+  height: 1px;
+  background: var(--gray-300);
+}
+
+.step:last-child .step-connector {
+  display: none;
+}
+
+.step h3 {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-sm);
+}
+
+.step p {
+  color: var(--gray-500);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .steps-row {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xl);
+  }
+  .step-connector {
+    display: none;
+  }
+}
+
+.about {
+  background: var(--black);
+  color: var(--white);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.about-text .section-subtitle {
+  color: var(--gray-400);
+}
+
+.about-text p {
+  color: var(--gray-400);
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-top: var(--space-md);
+}
+
+.about-stats {
+  display: flex;
+  gap: var(--space-xl);
+  margin-top: var(--space-xl);
+}
+
+.stat-item {
+  text-align: left;
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+  color: var(--primary);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.about-image {
+  position: relative;
+  aspect-ratio: 4/5;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--gray-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-image-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--gray-600);
+}
+
+.about-image-inner svg {
+  opacity: 0.3;
+}
+
+.about-image-border {
+  position: absolute;
+  inset: -1px;
+  border-radius: 16px;
+  border: 1px solid var(--gray-700);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+  }
+  .about-stats {
+    gap: var(--space-lg);
+  }
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+.testimonials {
+  background: var(--white);
+  overflow: hidden;
+}
+
+.testimonials-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.testimonials-track {
+  display: flex;
+  gap: var(--space-lg);
+  cursor: grab;
+  padding-bottom: var(--space-md);
+}
+
+.testimonials-track:active {
+  cursor: grabbing;
+}
+
+.testimonial-card {
+  min-width: 340px;
+  max-width: 400px;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.testimonial-stars {
+  display: flex;
+  gap: 2px;
+  margin-bottom: var(--space-md);
+  color: var(--primary);
+}
+
+.testimonial-card blockquote {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--gray-600);
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.testimonial-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.testimonial-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.testimonial-role {
+  font-size: 0.8rem;
+  color: var(--gray-500);
+}
+
+@media (max-width: 768px) {
+  .testimonial-card {
+    min-width: 280px;
+  }
+}
+
+.book-repair {
+  background: var(--gray-50);
+}
+
+.book-repair-header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.book-form {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-600);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 14px 16px;
+  border: 1px solid var(--gray-300);
+  border-radius: 10px;
+  background: var(--white);
+  font-size: 1rem;
+  color: var(--black);
+  transition: border-color var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-fast) var(--ease-out);
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.25);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--gray-400);
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  background: var(--primary);
+  color: var(--black);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 16px 32px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-out),
+              box-shadow var(--duration-normal) var(--ease-out);
+  margin-top: var(--space-sm);
+  width: 100%;
+}
+
+.submit-btn:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(250, 204, 21, 0.3);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+.submit-btn.success {
+  background: var(--gray-800);
+  color: var(--white);
+  pointer-events: none;
+}
+
+.success-message {
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+.success-message h3 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.success-message p {
+  color: var(--gray-500);
+}
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer {
+  background: var(--black);
+  color: var(--gray-400);
+  padding: var(--space-2xl) 0 var(--space-lg);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.footer-brand .navbar-logo {
+  font-size: 1.2rem;
+  margin-bottom: var(--space-md);
+  display: inline-block;
+}
+
+.footer-brand p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.footer-col h4 {
+  font-family: var(--font-display);
+  color: var(--white);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: var(--space-md);
+}
+
+.footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer-col a {
+  font-size: 0.9rem;
+  color: var(--gray-500);
+  transition: color var(--duration-fast);
+}
+
+.footer-col a:hover {
+  color: var(--white);
+}
+
+.footer-col .hours-line {
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  max-width: 200px;
+}
+
+.footer-col .hours-line span:last-child {
+  color: var(--gray-500);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--gray-800);
+  padding-top: var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.footer-bottom-links a {
+  color: var(--gray-600);
+  transition: color var(--duration-fast);
+}
+
+.footer-bottom-links a:hover {
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+  .footer-bottom {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+}
+
+
+    </style>
+    <script type="importmap">
+    {
+        "imports": {
+            "react": "https://esm.sh/react@18.2.0",
+            "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+            "framer-motion": "https://esm.sh/framer-motion@10.16.4?deps=react@18.2.0,react-dom@18.2.0",
+            "lucide-react": "https://esm.sh/lucide-react@0.294.0?deps=react@18.2.0"
+        }
+    }
+    </script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel" data-type="module">
+
+import React, { useState, useEffect } from 'react';
+import { createRoot } from 'react-dom/client';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Menu, X, ArrowRight, Wrench, CircleDot, Settings, Zap, ShieldCheck, Bike, Star, MapPin, Phone, Mail, Send, CheckCircle } from 'lucide-react';
+
+
+const links = [
+  { label: 'Services', href: '#services' },
+  { label: 'How It Works', href: '#how-it-works' },
+  { label: 'About', href: '#about' },
+  { label: 'Reviews', href: '#testimonials' },
+  { label: 'Book Repair', href: '#book' },
+]
+
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 50)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  return (
+    <motion.nav
+      className={`navbar ${scrolled ? 'scrolled' : ''}`}
+      initial={{ y: -80 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+    >
+      <div className="container">
+        <a href="#" className="navbar-logo">
+          Black Spoke<span></span>
+        </a>
+        <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <button
+          className="navbar-menu-btn"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+    </motion.nav>
+  )
+}
+
+
+
+function Hero() {
+  return (
+    <section className="hero" id="hero">
+      <div className="hero-content">
+        <motion.div
+          className="hero-tag"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Premium Bike Repair
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        >
+          We Keep You Rolling
+        </motion.h1>
+
+        <motion.p
+          className="hero-description"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          Expert mechanics, honest prices, fast turnaround.
+          Your bike deserves the best — and so do you.
+        </motion.p>
+
+        <motion.a
+          href="#book"
+          className="hero-cta"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.9 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          Book a Repair <ArrowRight size={18} />
+        </motion.a>
+      </div>
+
+      <motion.div
+        className="hero-scroll-indicator"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+      >
+        <motion.div
+          className="hero-scroll-line"
+          animate={{ scaleY: [0, 1, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ originY: 0 }}
+        />
+      </motion.div>
+    </section>
+  )
+}
+
+
+
+const services = [
+  {
+    icon: <Wrench size={22} />,
+    title: 'Basic Tune-Up',
+    desc: 'Brake and gear adjustment, tire inflation, chain lube, and a full safety check.',
+    price: 'From €35',
+  },
+  {
+    icon: <CircleDot size={22} />,
+    title: 'Tire & Tube Replacement',
+    desc: 'Flat fix or full tire swap. We carry all major brands and sizes in stock.',
+    price: 'From €15',
+  },
+  {
+    icon: <Settings size={22} />,
+    title: 'Full Overhaul',
+    desc: 'Complete strip-down, deep clean, bearing service, and rebuild from scratch.',
+    price: 'From €120',
+  },
+  {
+    icon: <Zap size={22} />,
+    title: 'Brake Service',
+    desc: 'Disc or rim brake bleed, pad replacement, rotor truing, and cable swap.',
+    price: 'From €25',
+  },
+  {
+    icon: <ShieldCheck size={22} />,
+    title: 'Wheel Truing',
+    desc: 'Precision spoke tensioning and rim straightening for a wobble-free ride.',
+    price: 'From €20',
+  },
+  {
+    icon: <Bike size={22} />,
+    title: 'Bike Fitting',
+    desc: 'Saddle height, handlebar reach, and cleat position tailored to your body.',
+    price: 'From €50',
+  },
+]
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1 },
+  },
+}
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+function Services() {
+  return (
+    <section className="services section" id="services">
+      <div className="container">
+        <motion.div
+          className="services-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="section-title">Our Services</h2>
+          <p className="section-subtitle" style={{ margin: '0 auto' }}>
+            From a quick flat fix to a full rebuild — we handle it all with care.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="services-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          {services.map((s) => (
+            <motion.div className="service-card" key={s.title} variants={cardVariants}>
+              <div className="service-icon">{s.icon}</div>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+              <div className="service-price">{s.price}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+
+
+const steps = [
+  {
+    num: '1',
+    title: 'Book Online',
+    desc: 'Pick a service and choose a date that works for you. It takes 30 seconds.',
+  },
+  {
+    num: '2',
+    title: 'Drop Off Your Bike',
+    desc: 'Bring your bike to our shop. We\'ll inspect it and confirm the work needed.',
+  },
+  {
+    num: '3',
+    title: 'Ride Away Happy',
+    desc: 'We\'ll text you when it\'s ready. Pay, hop on, and enjoy the ride.',
+  },
+]
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.2 } },
+}
+
+const stepVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] },
+  },
+}
+
+function HowItWorks() {
+  return (
+    <section className="how-it-works section" id="how-it-works">
+      <div className="container">
+        <motion.div
+          className="how-it-works-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="section-title">How It Works</h2>
+          <p className="section-subtitle" style={{ margin: '0 auto' }}>
+            Three simple steps to get your bike back in shape.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="steps-row"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-80px' }}
+        >
+          {steps.map((s) => (
+            <motion.div className="step" key={s.num} variants={stepVariants}>
+              <div className="step-number">{s.num}</div>
+              {s.num !== '3' && <div className="step-connector" />}
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  )
+}
+
+
+
+function About() {
+  return (
+    <section className="about section" id="about">
+      <div className="container">
+        <div className="about-grid">
+          <motion.div
+            className="about-text"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2 className="section-title">Built on Grease &amp; Passion</h2>
+            <p className="section-subtitle">
+              We started Black Spoke in a garage with two wrenches and a dream.
+            </p>
+            <p>
+              Ten years later, we're still the same team of obsessive mechanics
+              who'd rather fix your bike than eat lunch. Every repair gets our full
+              attention — no shortcuts, no upsells, just honest work at fair prices.
+              We believe a well-maintained bike changes how you see the city.
+            </p>
+
+            <div className="about-stats">
+              <motion.div
+                className="stat-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2, duration: 0.5 }}
+              >
+                <div className="stat-number">10+</div>
+                <div className="stat-label">Years Experience</div>
+              </motion.div>
+              <motion.div
+                className="stat-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.35, duration: 0.5 }}
+              >
+                <div className="stat-number">5K+</div>
+                <div className="stat-label">Bikes Repaired</div>
+              </motion.div>
+              <motion.div
+                className="stat-item"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+              >
+                <div className="stat-number">4.9</div>
+                <div className="stat-label">Avg. Rating</div>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="about-image"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="about-image-inner" style={{ width: '100%', height: '100%' }}>
+              <img 
+                src="https://images.unsplash.com/photo-1521406560946-836798e16ea8?q=80&w=1000&auto=format&fit=crop" 
+                alt="Bike repair workshop" 
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </div>
+            <div className="about-image-border" />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+
+
+const reviews = [
+  {
+    name: 'Anna M.',
+    initials: 'AM',
+    role: 'Daily Commuter',
+    text: 'Had my brakes done in under an hour. Smooth as butter now. These guys are the real deal.',
+    stars: 5,
+  },
+  {
+    name: 'Carlos R.',
+    initials: 'CR',
+    role: 'Weekend Rider',
+    text: 'Full overhaul on my vintage steel frame. They treated it like it was their own bike. Incredible work.',
+    stars: 5,
+  },
+  {
+    name: 'Sophie L.',
+    initials: 'SL',
+    role: 'Mountain Biker',
+    text: 'Honest pricing and they actually explain what they\'re doing. Refreshing compared to other shops.',
+    stars: 5,
+  },
+  {
+    name: 'James K.',
+    initials: 'JK',
+    role: 'Bike Courier',
+    text: 'I depend on my bike for work. They got me back on the road same day. Lifesavers.',
+    stars: 5,
+  },
+  {
+    name: 'Mia T.',
+    initials: 'MT',
+    role: 'Casual Rider',
+    text: 'First time getting a bike fitting — total game changer. No more knee pain on long rides!',
+    stars: 5,
+  },
+]
+
+function Stars({ count }) {
+  return (
+    <div className="testimonial-stars">
+      {Array.from({ length: count }).map((_, i) => (
+        <Star key={i} size={16} fill="currentColor" />
+      ))}
+    </div>
+  )
+}
+
+function Testimonials() {
+  return (
+    <section className="testimonials section" id="testimonials">
+      <div className="container">
+        <motion.div
+          className="testimonials-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="section-title">What Riders Say</h2>
+          <p className="section-subtitle" style={{ margin: '0 auto' }}>
+            Don't just take our word for it.
+          </p>
+        </motion.div>
+      </div>
+
+      <motion.div
+        className="testimonials-track"
+        style={{ paddingLeft: 'max(2rem, calc((100vw - 1200px) / 2 + 2rem))' }}
+        drag="x"
+        dragConstraints={{ right: 0, left: -((reviews.length - 2) * 380) }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        {reviews.map((r) => (
+          <motion.div
+            className="testimonial-card"
+            key={r.name}
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Stars count={r.stars} />
+            <blockquote>"{r.text}"</blockquote>
+            <div className="testimonial-author">
+              <div className="testimonial-avatar">{r.initials}</div>
+              <div>
+                <div className="testimonial-name">{r.name}</div>
+                <div className="testimonial-role">{r.role}</div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
+    </section>
+  )
+}
+
+
+
+function BookRepair() {
+  const [submitted, setSubmitted] = useState(false)
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setSubmitted(true)
+  }
+
+  return (
+    <section className="book-repair section" id="book">
+      <div className="container">
+        <motion.div
+          className="book-repair-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="section-title">Book a Repair</h2>
+          <p className="section-subtitle" style={{ margin: '0 auto' }}>
+            Fill out the form and we'll get back to you within a few hours.
+          </p>
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {!submitted ? (
+            <motion.form
+              className="book-form"
+              key="form"
+              onSubmit={handleSubmit}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.5 }}
+            >
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="name">Full Name</label>
+                  <input type="text" id="name" placeholder="John Doe" required />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input type="email" id="email" placeholder="john@example.com" required />
+                </div>
+              </div>
+
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="phone">Phone</label>
+                  <input type="tel" id="phone" placeholder="+34 600 000 000" />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="date">Preferred Date</label>
+                  <input type="date" id="date" required />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="bike-type">Bike Type</label>
+                <select id="bike-type" required defaultValue="">
+                  <option value="" disabled>Select your bike type</option>
+                  <option value="road">Road Bike</option>
+                  <option value="mountain">Mountain Bike</option>
+                  <option value="hybrid">Hybrid / City Bike</option>
+                  <option value="ebike">E-Bike</option>
+                  <option value="gravel">Gravel Bike</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="issue">Describe the Issue</label>
+                <textarea
+                  id="issue"
+                  placeholder="Tell us what's wrong — weird noises, shifting problems, flat tire..."
+                  rows={4}
+                  required
+                />
+              </div>
+
+              <motion.button
+                type="submit"
+                className="submit-btn"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Send size={18} />
+                Submit Repair Request
+              </motion.button>
+            </motion.form>
+          ) : (
+            <motion.div
+              className="success-message"
+              key="success"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+              >
+                <CheckCircle size={56} strokeWidth={1.5} />
+              </motion.div>
+              <h3>Request Received!</h3>
+              <p>We'll review your details and get back to you shortly. Thanks for choosing Black Spoke.</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </section>
+  )
+}
+
+
+
+function Footer() {
+  return (
+    <motion.footer
+      className="footer"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6 }}
+    >
+      <div className="container">
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <a href="#" className="navbar-logo">
+              Black Spoke<span></span>
+            </a>
+            <p>
+              Expert bike repair in the heart of the city.
+              Honest work, fair prices, fast turnaround.
+            </p>
+          </div>
+
+          <div className="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#how-it-works">How It Works</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#book">Book Repair</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><a href="#"><MapPin size={14} style={{ display: 'inline', marginRight: 6 }} />123 Bike Lane, City</a></li>
+              <li><a href="tel:+34600000000"><Phone size={14} style={{ display: 'inline', marginRight: 6 }} />+34 600 000 000</a></li>
+              <li><a href="mailto:hello@blackspoke.com"><Mail size={14} style={{ display: 'inline', marginRight: 6 }} />hello@blackspoke.com</a></li>
+            </ul>
+          </div>
+
+          <div className="footer-col">
+            <h4>Hours</h4>
+            <div className="hours-line"><span>Mon – Fri</span><span>9:00 – 19:00</span></div>
+            <div className="hours-line"><span>Saturday</span><span>10:00 – 16:00</span></div>
+            <div className="hours-line"><span>Sunday</span><span>Closed</span></div>
+          </div>
+        </div>
+
+        <div className="footer-bottom">
+          <span>© 2026 Black Spoke Bikes. All rights reserved.</span>
+          <div className="footer-bottom-links">
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
+          </div>
+        </div>
+      </div>
+    </motion.footer>
+  )
+}
+
+
+
+export default function App() {
+  return (
+    <div className="app">
+      <Navbar />
+      <main>
+        <Hero />
+        <Services />
+        <HowItWorks />
+        <About />
+        <Testimonials />
+        <BookRepair />
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+
+
+const root = createRoot(document.getElementById('root'));
+root.render(<App />);
+
+    </script>
+</body>
+</html>
