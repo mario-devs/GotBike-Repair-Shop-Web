@@ -15,7 +15,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="#" className="navbar-logo">
-              GOT BIKE?<span></span>
+              GOT BIKE?
             </a>
             <p>
               Expert bike repair with German precision.

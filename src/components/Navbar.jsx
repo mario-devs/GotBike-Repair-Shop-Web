@@ -30,7 +30,7 @@ export default function Navbar() {
     >
       <div className="container">
         <a href="#" className="navbar-logo">
-          GOT BIKE?<span></span>
+          GOT BIKE?
         </a>
         <div className={`navbar-links ${menuOpen ? 'open' : ''}`}>
           {links.map((link) => (
