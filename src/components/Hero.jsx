@@ -5,45 +5,61 @@ import './Hero.css'
 export default function Hero() {
   return (
     <section className="hero" id="hero">
-      <div className="hero-content">
-        <motion.div
-          className="hero-tag"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Premium Bike Repair
-        </motion.div>
+      <div className="container hero-container">
+        <div className="hero-grid">
+          <div className="hero-text-side">
+            <motion.div
+              className="hero-tag"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Premium Bike Repair
+            </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        >
-          We Keep You Rolling
-        </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              We Keep You Rolling
+            </motion.h1>
 
-        <motion.p
-          className="hero-description"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-        >
-          Expert mechanics, honest prices, fast turnaround.
-          Your bike deserves the best — and so do you.
-        </motion.p>
+            <motion.p
+              className="hero-description"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              Expert mechanics, honest prices, fast turnaround.
+              Your bike deserves the best — and so do you.
+            </motion.p>
 
-        <motion.a
-          href="#book"
-          className="hero-cta"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.9 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          Book a Repair <ArrowRight size={18} />
-        </motion.a>
+            <motion.a
+              href="#book"
+              className="hero-cta"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Book a Repair <ArrowRight size={18} />
+            </motion.a>
+          </div>
+
+          <motion.div 
+            className="hero-image-side"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="hero-image-wrapper">
+              <img src="/resources/PHOTOMAIN.jpg" alt="Bike repair shop" />
+              <div className="hero-image-overlay" />
+            </div>
+          </motion.div>
+        </div>
       </div>
 
       <motion.div

@@ -110,7 +110,7 @@ export default function BookRepair() {
                 <CheckCircle size={56} strokeWidth={1.5} />
               </motion.div>
               <h3>Request Received!</h3>
-              <p>We'll review your details and get back to you shortly. Thanks for choosing GOT BIKE?.</p>
+              <p>We'll review your details and get back to you shortly. Thanks for choosing GOT BIKE?</p>
             </motion.div>
           )}
         </AnimatePresence>
