@@ -70,7 +70,7 @@ export default function Services() {
         >
           <h2 className="section-title">Our Services</h2>
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            From a quick flat fix to a full rebuild — we handle it all with care.
+            From a quick flat fix to a full rebuild, we handle it all with care.
           </p>
         </motion.div>
 

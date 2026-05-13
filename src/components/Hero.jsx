@@ -32,7 +32,7 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               Expert mechanics, honest prices, fast turnaround.
-              Your bike deserves the best — and so do you.
+              Your bike deserves the best, and so do you.
             </motion.p>
 
             <motion.a

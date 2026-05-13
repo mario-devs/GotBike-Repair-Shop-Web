@@ -78,7 +78,7 @@ export default function BookRepair() {
                 <label htmlFor="issue">Describe the Issue</label>
                 <textarea
                   id="issue"
-                  placeholder="Tell us what's wrong — weird noises, shifting problems, flat tire..."
+                  placeholder="Tell us what's wrong: weird noises, shifting problems, flat tire..."
                   rows={4}
                   required
                 />

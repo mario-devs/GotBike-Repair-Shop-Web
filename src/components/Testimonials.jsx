@@ -7,14 +7,14 @@ const reviews = [
     name: 'Mario P.',
     initials: 'MP',
     role: 'Local Resident',
-    text: 'I went there to fix my chain and Martin changed it quickly. He even invited me for a coffee! Super nice, quick, and charming service.',
+    text: 'I went there to fix my chain and they changed it quickly. He even invited me for a coffee! Super nice, quick, and charming service.',
     stars: 5,
   },
   {
     name: 'Anna M.',
     initials: 'AM',
     role: 'Daily Commuter',
-    text: 'Had my brakes done in under an hour. Smooth as butter now. Martin is the real deal.',
+    text: 'Had my brakes done in under an hour. Smooth as butter now. This shop is the real deal.',
     stars: 5,
   },
   {

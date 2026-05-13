@@ -36,7 +36,16 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Contact</h4>
             <ul>
-              <li><a href="#"><MapPin size={14} style={{ display: 'inline', marginRight: 6 }} />Borstelweg 2, 7545 MS Enschede</a></li>
+              <li>
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Borstelweg+2,+7545+MS+Enschede" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <MapPin size={14} style={{ display: 'inline', marginRight: 6 }} />
+                  Borstelweg 2, 7545 MS Enschede
+                </a>
+              </li>
               <li><a href="tel:+31618625613"><Phone size={14} style={{ display: 'inline', marginRight: 6 }} />+31 6 18625613</a></li>
               <li><a href="mailto:kazaaam@me.com"><Mail size={14} style={{ display: 'inline', marginRight: 6 }} />kazaaam@me.com</a></li>
             </ul>
